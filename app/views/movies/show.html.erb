@@ -1,0 +1,56 @@
+<p id="notice"><%= notice %></p>
+<div class="row">
+
+
+  <div class="col-md-5-offset">
+    <%= image_tag @movie.photo.url, size:'280' %>
+    </div>
+  <div class="col-md-4-offset-1">
+  <strong>Tytuł:</strong>
+  <%= @movie.title %>,
+
+  <strong>Ocena:</strong>
+
+  <% @movie.rating.times do %>
+        <span class="star" aria-hidden="true"></span>
+        <% end %>,
+
+  <strong>Cena:</strong>
+  <%= @movie.price %> zł,
+
+  <strong>Gatunek:</strong>
+  <%= @movie.genre %><br>
+
+  <strong>Obsada:</strong><br>
+  <%= simple_format @movie.cast.tr(",","\n") %>
+
+  </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3-offset">
+    <strong>Opis:</strong><br>
+    <%= @movie.description %>
+  </div>
+    <%= link_to 'Złóż zamówienie', buy_movie_path(@movie.id), class: "btn btn-lg" %>
+    </div>
+
+
+<div class="row">
+  <div class="col-md-3-offset">
+<%= render 'reviews/form' %>
+    </div></div>
+    Oceny użytkowników:<br>
+
+    <% @user_reviews.each do |review| %>
+    <div class="row">
+      <div class="col-md-3-offset">
+        <%= image_tag avatar_url(review.user) %>
+        <%= review.description %>
+        <% review.rating.times do %>
+            <span class="star" aria-hidden="true"></span>
+        <% end %>
+        </div></div>
+    <% end %>
+
+
+</div>

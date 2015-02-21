@@ -1,0 +1,24 @@
+Czy chcesz kupić film
+<%= @movie.title %>
+Cena: <%= @movie.price %>
+<%= form_for(@order) do |f| %>
+  <% if @order.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
+
+      <ul>
+      <% @order.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+      <%= f.hidden_field :movie_id, value: @movie.id%>
+    <%= f.hidden_field :user_id, value: current_user.id if current_user%>
+    <%= f.hidden_field :sum, value: @movie.price %>
+
+
+  <div class="actions">
+    <%= f.submit 'dodaj do koszyka' %>
+  </div>
+<% end %>
